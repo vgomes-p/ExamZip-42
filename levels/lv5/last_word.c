@@ -1,45 +1,30 @@
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-char	ft_putchar(char ch)
+int main(int ac, char **av)
 {
-	write(1, &ch, 1);
-	return(ch);
-}
-
-int	main(int argc, char **argv)
-{
-	int	len = 0;
-	int	total_len = 0;
-	int	difference = 0;
-	int	needed = 0;
-	int	end = 0;
-
-	if (argc == 2)
+	int pos = 0;
+	if (ac == 2)
 	{
-		while (argv[1][len] != '\0')
-			len++;
-		len--;
-		total_len = len;
-		if (len >= 0 && (argv[1][len] == ' ' || argv[1][len] == '\t'))
+		while (av[1][pos] != '\0')
+			pos++;
+		pos--;
+		if (av[1][pos] == ' ' || av[1][pos] == '\t')
 		{
-			while (argv[1][len] == ' ' || argv[1][len] == '\t')
-			{
-				len--;
-				end++;
-				difference++;
-			}
+			while (av[1][pos] == ' ' || av[1][pos] == '\t')
+				pos--;
 		}
-		while (argv[1][len] != ' ' && argv[1][len] != '\t')
+		if (av[1][pos] != ' ' && av[1][pos] != '\t')
 		{
-			difference++;
-			len--;
+			while (av[1][pos] != ' ' && av[1][pos] != '\t')
+				pos--;
+			pos++;
 		}
-		needed = total_len - difference + 1;
-		while (needed <= total_len - end)
+		while (av[1][pos] != '\0' && (av[1][pos] != ' ' && av[1][pos] != '\t'))
 		{
-			ft_putchar(argv[1][needed]);
-			needed++;
+			write(1, &av[1][pos], 1);
+			pos++;
 		}
 	}
 	write(1, "\n", 1);
