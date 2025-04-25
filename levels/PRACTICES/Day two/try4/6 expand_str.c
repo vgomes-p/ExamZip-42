@@ -15,28 +15,3 @@ a newline. */
 
 
 #include "unistd.h"
-
-int main(int argc, char **argv)
-{
-	int pos = 0;
-
-	if (argc == 2)
-	{
-		while (argv[1][pos] == ' ' || argv[1][pos] == '\t')
-			pos++;
-		while (argv[1][pos] != '\0')
-		{
-			while (argv[1][pos] != ' ' && argv[1][pos] != '\t' && argv[1][pos] != '\0')
-			{
-				write(1, &argv[1][pos], 1);
-				pos++;
-			}
-			while (argv[1][pos] == ' ' || argv[1][pos] == '\t')
-				pos++;
-			if (argv[1][pos] != '\0')
-				write(1, "   ", 3);
-		}
-	}
-	write(1, "\n", 1);
-	return (0);
-}

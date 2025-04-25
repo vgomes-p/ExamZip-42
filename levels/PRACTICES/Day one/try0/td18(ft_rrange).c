@@ -15,23 +15,24 @@ return a pointer to the first value of the array.*/
 #include <stdlib.h>
 #include <stdio.h>
 
-int *ft_rrange(int start, int end)
+int	*ft_rrange(int start, int end)
 {
-	int *array;
-	int pos;
-	int nbr;
-	int size;
+	int	*array;
+	int	pos = 0;
+	int	size;
 
 	if (end > start)
 		size = end - start + 1;
 	else
 		size = start - end + 1;
+
 	array = malloc(sizeof(int) * size);
 	if (!array)
-		return (NULL);
-	pos = 0;
+		return(NULL);
+
 	while (pos < size)
 	{
+		int cnt;
 		if (end > start)
 			array[pos] = end - pos;
 		else
@@ -39,28 +40,4 @@ int *ft_rrange(int start, int end)
 		pos++;
 	}
 	return (array);
-}
-
-int main(void) {
-    int *result;
-    int start = 3, end = 5;
-    int size, i;
-    
-    result = ft_rrange(start, end);
-    if (!result) {
-        printf("Memory allocation failed.\n");
-        return 1;
-    }
-    
-    size = (start >= end) ? (start - end + 1) : (end - start + 1);
-    
-    printf("Array: ");
-    for (i = 0; i < size; i++) {
-        printf("%d ", result[i]);
-    }
-    printf("\n");
-    
-    free(result);
-    
-    return 0;
 }

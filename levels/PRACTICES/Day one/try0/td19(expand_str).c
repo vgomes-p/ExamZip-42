@@ -16,24 +16,24 @@ a newline. */
 
 #include "unistd.h"
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
 	int pos = 0;
 
-	if (argc == 2)
+	if (ac == 2)
 	{
-		while (argv[1][pos] == ' ' || argv[1][pos] == '\t')
+		while (av[1][pos] != '\0' && (av[1][pos] == ' ' || av[1][pos] == '\t'))
 			pos++;
-		while (argv[1][pos] != '\0')
+		while (av[1][pos] != '\0')
 		{
-			while (argv[1][pos] != ' ' && argv[1][pos] != '\t' && argv[1][pos] != '\0')
+			while (av[1][pos] != '\0' && (av[1][pos] != ' ' && av[1][pos] != '\t'))
 			{
-				write(1, &argv[1][pos], 1);
+				write(1, &av[1][pos], 1);
 				pos++;
 			}
-			while (argv[1][pos] == ' ' || argv[1][pos] == '\t')
+			while (av[1][pos] == ' ' || av[1][pos] == '\t')
 				pos++;
-			if (argv[1][pos] != '\0')
+			if(av[1][pos] != '\0')
 				write(1, "   ", 3);
 		}
 	}
