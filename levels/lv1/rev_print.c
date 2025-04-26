@@ -1,5 +1,3 @@
-/*Write a function that takes a string and write it starting with the last character to the first one*/
-
 #include <unistd.h>
 #include <stdio.h>
 

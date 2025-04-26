@@ -1,9 +1,3 @@
-// Write a program that prints the numbers from 1 to 100, each separated by a
-// newline.
-// If the number is a multiple of 4, it prints 'buzz' instead.
-// If the number is a multiple of 7, it prints 'fizz' instead.
-// If the number is both a multiple of 4 and a multiple of 7, it prints 'buzzfizz' instead.
-
 #include <unistd.h>
 #include <stdio.h>
 

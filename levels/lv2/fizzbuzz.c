@@ -1,32 +1,23 @@
-// Write a program that prints the numbers from 1 to 100, each separated by a
-// newline.
-// If the number is a multiple of 3, it prints 'fizz' instead.
-// If the number is a multiple of 5, it prints 'buzz' instead.
-// If the number is both a multiple of 3 and a multiple of 5, it prints 'fizzbuzz' instead.
-
-
 #include <unistd.h>
 #include <stdio.h>
 
-char	ft_putchar(char ch)
+void ft_putch(char ch)
 {
 	write(1, &ch, 1);
-	return (ch);
 }
 
-char	ft_putnbr(int nbr)
+void ft_putnbr(int nbr)
 {
-	char	ch;
-	if (nbr > 10)
+	char ch;
+	if (nbr >= 10)
 		ft_putnbr(nbr / 10);
 	ch = nbr % 10 + '0';
-	ft_putchar(ch);
-	return (ch);
+	ft_putch(ch);
 }
 
-int	main(void)
+int main(void)
 {
-	int	nbr = 1;
+	int nbr = 1;
 	while (nbr != 101)
 	{
 		if (nbr % 3 == 0 && nbr % 5 == 0)
@@ -44,4 +35,3 @@ int	main(void)
 	}
 	return (0);
 }
-
