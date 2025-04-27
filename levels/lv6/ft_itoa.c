@@ -2,40 +2,87 @@
 
 char	*ft_itoa(int nbr)
 {
-	long	nb; // Usamos long pra evitar overflow com INT_MIN (-2147483648)
-	int		len; // Vai guardar o número de caracteres necessários pra representar o número
-	char	*res; // Ponteiro pro resultado (a string final)
+	/*Inicie as variaveis para contador/tamanho, resultado e evitar overflow*/
+	long	nb;
+	int		len;
+	char	*res;
 
-	nb = nbr; // Copiamos o número para 'nb', que é long
-	len = 0; // Começamos com tamanho zero
-	if (nb <= 0) // Se for 0 ou negativo precisamos de pelo menos 1 espaço: pra '0' ou pro '-'
+	/* copie o numero para a variavel anti-overflow e inicie o contador*/
+	nb = nbr;
+	len = 0;
+
+	/*se o numero for negativo ou 0, garanta um espaço para o '-' ou o proprio 0*/
+	if (nb <= 0)
 		len = 1;
-	long tmp = nb; // Fazemos uma cópia de 'nb' só pra contar os dígitos
-	if (tmp < 0) // Se for negativo transformamos em positivo pra contar os dígitos corretamente
+
+	/* faça uma copia temporaria do anti-overflow (aof) para contar os digitos sem alterar o aof*/
+	long tmp = nb;
+
+	/* se a copia for negativa, tranforme em positiva */
+	if (tmp < 0)
 		tmp = -tmp;
-	while (tmp > 0) // Enquanto ainda tiver dígitos, remove o último dígito, conta esse dígito no len
+
+	/* enquanto a copia existir, atribua a copia o valor da copia dividido por 10 e incremente o contador */
+	while (tmp > 0)
 	{
-		tmp /= 10;
+		tmp = tmp / 10;
 		len++;
 	}
-	res = malloc(len + 1); // Aloca espaço para os caracteres + o '\0'
+
+	/* aloque na resposta o valor de contador + 1 */
+	res = malloc(len + 1);
 	if (!res)
-		return (NULL); // Se a alocação falhar, retorna NULL
-	res[len] = '\0'; // Coloca o terminador de string no final
-	if (nb == 0) // Caso especial: se o número for 0, coloca '0' na string e retorna a string pronta
+		return (NULL);
+
+	/*atribua ao ultimo valor de contador o terminador nulo */
+	res[len] = '\0';
+
+	/* se o aof for 0, atribua a posiçao 0 da resposta o caractere 0 */
+	if (nb == 0)
 	{
 		res[0] = '0';
 		return (res);
 	}
-	if (nb < 0) // Se o número original era negativo, coloca o sinal de menos na primeira posição e torna positivo pra facilitar o resto
+
+	/* se o aof for negativo, atribula a posição 0 o caractere - e tranforme nb em positivo */
+	if (nb < 0)
 	{
 		res[0] = '-';
 		nb = -nb;
 	}
-	while (nb > 0) // Enquanto ainda tiver dígitos, coloca o último dígito na posição correta, convertendo pra caractere, remove o dígito já usado
+
+	/* enquanto nb for menor que zero, decremente o contador e atribua a posição atual mod de nb por 10 + '0' e divida nb por 10*/
+	while (nb > 0)
 	{
-		res[--len] = (nb % 10) + '0';
-		nb /= 10;
+		len--;
+		res[len] = (nb % 10) + '0';
+		nb = nb / 10;
 	}
-	return (res); // Retorna a string pronta
+	return (res);
+}
+
+char	*ft_itoa(int nbr)
+{
+	/*Inicie as variaveis para contador/tamanho, resultado e evitar overflow*/
+
+	/* copie o numero para a variavel anti-overflow e inicie o contador*/
+
+	/*se o numero for negativo ou 0, garanta um espaço para o '-' ou o proprio 0*/
+
+	/* faça uma copia temporaria do anti-overflow (aof) para contar os digitos sem alterar o aof*/
+
+	/* se a copia for negativa, tranforme em positiva */
+
+	/* enquanto a copia existir, atribua a copia o valor da copia dividido por 10 e incremente o contador */
+
+	/* aloque na resposta o valor de contador + 1 */
+
+	/*atribua ao ultimo valor de contador o terminador nulo */
+
+	/* se o aof for 0, atribua a posiçao 0 da resposta o caractere 0 */
+
+	/* se o aof for negativo, atribula a posição 0 o caractere - e tranforme nb em positivo */
+
+	/* enquanto nb for maior que zero, decremente o contador e atribua a posição atual mod de nb por 10 + '0' e divida nb por 10*/
+
 }
