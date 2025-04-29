@@ -10,11 +10,11 @@ char **split(char *str)
 	array = malloc(WD_LEN);
 	while (str[pos])
 	{
-		if (str[pos] > 32)
+		if (str[pos] > ' ')
 		{
 			int letter_pos = 0;
 			array[word] = malloc(WD_LEN);
-			while (str[pos] > 32)
+			while (str[pos] > ' ')
 				array[word][letter_pos++] = str[pos++];
 			array[word++][letter_pos] = '\0';
 		}

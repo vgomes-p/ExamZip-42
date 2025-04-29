@@ -1,27 +1,52 @@
 #include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 
 char	*ft_itoa(int nbr)
 {
-	/*Inicie as variaveis para contador/tamanho, resultado e evitar overflow*/
+	long nb;
+	int pos;
+	char *string;
 
-	/* copie o numero para a variavel anti-overflow e inicie o contador*/
+	nb = nbr;
+	pos = 0;
+	if (nb <= 0)
+		pos = 1;
+	long temp = nb;
+	if (temp < 0)
+		temp = -temp;
+	while (temp > 0)
+	{
+		temp = temp / 10;
+		pos++;
+	}
+	string = malloc(pos + 1);
+	if (!string)
+		return (NULL);
+	string[pos] = '\0';
+	if (nb == 0)
+	{
+		string[0] = '0';
+		return (string);
+	}
+	if (nb < 0)
+	{
+		string[0] = '-';
+		nb = -nb;
+	}
+	while (nb > 0)
+	{
+		pos--;
+		string[pos] = (nb % 10) + '0';
+		nb = nb / 10;
+	}
+	return (string);
+}
 
-	/*se o numero for negativo ou 0, garanta um espaço para o '-' ou o proprio 0*/
-
-	/* faça uma copia temporaria do anti-overflow (aof) para contar os digitos sem alterar o aof*/
-
-	/* se a copia for negativa, tranforme em positiva */
-
-	/* enquanto a copia existir, atribua a copia o valor da copia dividido por 10 e incremente o contador */
-
-	/* aloque na resposta o valor de contador + 1 */
-
-	/*atribua ao ultimo valor de contador o terminador nulo */
-
-	/* se o aof for 0, atribua a posiçao 0 da resposta o caractere 0 */
-
-	/* se o aof for negativo, atribula a posição 0 o caractere - e tranforme nb em positivo */
-
-	/* enquanto nb for maior que zero, decremente o contador e atribua a posição atual mod de nb por 10 + '0' e divida nb por 10*/
-
+int main(void)
+{
+	int nbr = -549151;
+	printf("number: %d\n", nbr);
+	printf("string: %s\n", ft_itoa(nbr));
+	return (0);
 }
