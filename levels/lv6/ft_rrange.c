@@ -28,5 +28,5 @@ int	*ft_rrange(int start, int end)
 			array[pos] = end;
 		pos++;
 	}
-	return (array);
+	return (&array[0]);
 }
